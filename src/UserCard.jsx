@@ -1,13 +1,15 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 
-function UserCard({ name, email, street, city }) {
+function UserCard({ name, email, street, city, ...rest }) {
   // Gunakan array destructuring
   const [clicked, setClicked] = useState(false);
 
+  console.log(Object.entries(rest));
+
   // Fungsi handler
   function handleClick() {
-    setClicked(true);
+    setClicked(true );
   }
 
   return (
@@ -19,6 +21,13 @@ function UserCard({ name, email, street, city }) {
       <p className="text-gray-600">
         <span className="font-medium">Address:</span> {street}, {city}
       </p>
+
+            {/* Menampilkan data tambahan dari rest */}
+      {Object.entries(rest).map(([key, value]) => (
+        <p key={key} className="text-gray-600">
+          <span className="font-medium capitalize">{key}:</span> {value}
+        </p>
+      ))}
 
       <button
         className={`${clicked ? "bg-special-green" : "bg-gray-01"} text-white p-2 rounded-md`}
