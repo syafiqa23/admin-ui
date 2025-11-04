@@ -10,7 +10,7 @@ html {
   --font-body: "Inter", sans-serif;
   --font-poppins: "Montserrat", sans-serif;
 
-   --color-primary: #299d91;
+  --color-primary: #299d91;
   --color-secondary: #525256;
   --color-defaultBlack: #191919;
   --color-gray-01: #666666;
@@ -24,4 +24,70 @@ html {
   --color-special-mainBg: #f4f5f7;
   --color-special-green: #4daf6e;
   --color-special-red: #e73d1c;
+  --color-special-red2: #b83116;
+
+}
+.post-card {
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 10px;
+  padding: 1rem;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.post-card:hover {
+  transform: scale(1.03);
+  border-color: var(--color-black);
+  background-color: #ffe6eb;
+}
+
+.post-title {
+  font-weight: 600;
+  color: #191919;
+  font-size: 1.1rem;
+  margin-bottom: 0.75rem;
+  text-align: center;
+}
+
+.post-body {
+  color: var(--color-gray-02);
+  font-size: 0.9rem;
+  margin-bottom: 1.25rem;
+  text-align: center;
+  line-height: 1.4;
+}
+
+.post-footer {
+  display: flex;
+  justify-content: center;
+}
+
+.btn {
+  font-weight: 600;
+  border: none;
+  border-radius: 3px;
+  padding: 0.4rem 5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-default {
+  background-color: #666666;
+  color: white;
+}
+
+.btn-default:hover {
+  background-color: #bbb;
+}
+
+.btn-clicked {
+  background-color: var(--color-special-red2);
+  color: white;
+}
+
+.btn-clicked:hover {
+  background-color: #e63a18;
 }
