@@ -1,16 +1,8 @@
-import { useState } from 'react';
-import PropTypes from 'prop-types';
+import { useState } from "react";
 
-function UserCard({ name, email, street, city, ...rest }) {
-  // Gunakan array destructuring
+function UserCard(props) {
+  const {name, email, street, city, ...rest} = props;
   const [clicked, setClicked] = useState(false);
-
-  console.log(Object.entries(rest));
-
-  // Fungsi handler
-  function handleClick() {
-    setClicked(true );
-  }
 
   return (
     <div className="bg-white p-6 rounded-lg shadow hover:shadow-md transition-shadow">
@@ -19,10 +11,11 @@ function UserCard({ name, email, street, city, ...rest }) {
         <span className="font-medium">Email:</span> {email}
       </p>
       <p className="text-gray-600">
-        <span className="font-medium">Address:</span> {street}, {city}
+        <span className="font-medium">Address:</span>
+        {street}, {city}
       </p>
 
-            {/* Menampilkan data tambahan dari rest */}
+      {/* Menampilkan data tambahan dari rest */}
       {Object.entries(rest).map(([key, value]) => (
         <p key={key} className="text-gray-600">
           <span className="font-medium capitalize">{key}:</span> {value}
@@ -30,21 +23,15 @@ function UserCard({ name, email, street, city, ...rest }) {
       ))}
 
       <button
-        className={`${clicked ? "bg-special-green" : "bg-gray-01"} text-white p-2 rounded-md`}
-        onClick={handleClick}
+        className={`text-white p-2 rounded-md 
+          ${clicked ? "bg-special-green" : "bg-gray-01"}
+        `}
+        onClick={() => setClicked(true)}
       >
-        {clicked ? 'Tombol sudah diklik' : 'Silakan Klik'}
+        {clicked ? "Tombol sudah diklik" : "Silakan Klik"}
       </button>
     </div>
   );
 }
-
-// Validasi props agar bebas warning ESLint
-UserCard.propTypes = {
-  name: PropTypes.string.isRequired,
-  email: PropTypes.string.isRequired,
-  street: PropTypes.string.isRequired,
-  city: PropTypes.string.isRequired,
-};
 
 export default UserCard;
