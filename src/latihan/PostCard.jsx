@@ -1,4 +1,6 @@
 import {useState} from 'react'
+import PropTypes from "prop-types";
+
 
 function PostCard(props) {
     const { id, userId, title, body } = props;

@@ -4,7 +4,7 @@ import { getUsers, getPosts } from "./Services";
 import PostCard from "./PostCard";
 
 function Exercise() {
-  const [setUsers] = useState([]);
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {

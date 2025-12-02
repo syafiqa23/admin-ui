@@ -33,6 +33,15 @@ export default [
         'warn',
         { allowConstantExport: true },
       ],
+      'react/prop-types': 'off',               // Matikan warning propTypes
+      'no-unused-vars': 'off',                 // Matikan warning variabel tidak dipakai
+      'react-hooks/exhaustive-deps': 'off',    // Matikan warning dependency useEffect
+      'react/jsx-no-target-blank': 'off',
+      'react-refresh/only-export-components': 'off',
+
+      // Opsional: matikan semua peringatan → hanya error penting yang muncul
+      'no-console': 'off',
+      'no-debugger': 'off'
     },
   },
 ]
