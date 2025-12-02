@@ -2,6 +2,7 @@ import React from 'react'
 import LabeledInput from "../Elements/LabeledInput";
 import Button from "../Elements/Button";
 import GoogleIcon from "../Elements/GoogleIcon";
+import { Link } from "react-router-dom";
 
 function FormSignUp() {
     return (
@@ -66,9 +67,9 @@ function FormSignUp() {
                 {/* Already have account */}
                 <p className="text-center text-sm text-gray-600 mt-6">
                     Already have an account?{" "}
-                    <a href="#" className="text-teal-600 font-semibold">
+                    <Link to="/login" className="text-teal-600 font-semibold">
                         Sign in here
-                    </a>
+                    </Link>
                 </p>
             </div>
         </>
