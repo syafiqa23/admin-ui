@@ -1,79 +1,138 @@
-import React from 'react'
+import React from "react";
 import LabeledInput from "../Elements/LabeledInput";
 import Button from "../Elements/Button";
-import GoogleIcon from "../Elements/GoogleIcon";
 import { Link } from "react-router-dom";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
 
-function FormSignUp() {
+const SignUpSchema = Yup.object().shape({
+    name: Yup.string().required("Nama wajib diisi"),
+    email: Yup.string()
+        .email("Email tidak valid")
+        .required("Email wajib diisi"),
+    password: Yup.string().required("Password wajib diisi"),
+});
+
+function FormSignUp({ onSubmit }) {
     return (
         <>
-            <div className="w-full max-w-md mx-auto">
+            {/* form start */}
+            <div className="mt-16">
+                <Formik
+                    initialValues={{
+                        name: "",
+                        email: "",
+                        password: "",
+                    }}
+                    validationSchema={SignUpSchema}
+                    onSubmit={async (values, { setSubmitting }) => {
+                        try {
+                            await onSubmit(values);
+                        } finally {
+                            setSubmitting(false);
+                        }
+                    }}
+                >
+                    {({ isSubmitting }) => (
+                        <Form>
+                            {/* name */}
+                            <div className="mb-6">
+                                <Field name="name">
+                                    {({ field }) => (
+                                        <LabeledInput
+                                            {...field}
+                                            id="name"
+                                            type="text"
+                                            label="Name"
+                                            placeholder="Tanzir Rahman"
+                                        />
+                                    )}
+                                </Field>
+                                <ErrorMessage
+                                    name="name"
+                                    component="p"
+                                    className="text-red-500 text-xs mt-1"
+                                />
+                            </div>
 
-                {/* Logo */}
-                <h1 className="text-3xl font-bold text-center text-teal-600 mb-6">
-                </h1>
-                <p className="text-center text-xl font-semibold mb-8">
-                    Create an account
-                </p>
+                            {/* email */}
+                            <div className="mb-6">
+                                <Field name="email">
+                                    {({ field }) => (
+                                        <LabeledInput
+                                            {...field}
+                                            id="email"
+                                            type="email"
+                                            label="Email Address"
+                                            placeholder="hello@example.com"
+                                        />
+                                    )}
+                                </Field>
+                                <ErrorMessage
+                                    name="email"
+                                    component="p"
+                                    className="text-red-500 text-xs mt-1"
+                                />
+                            </div>
 
-                {/* Input Fields */}
-                <div className="space-y-4">
-                    <LabeledInput
-                        label="Name"
-                        placeholder="Tanzir Rahman"
-                        type="text"
-                    />
+                            {/* password */}
+                            <div className="mb-6">
+                                <Field name="password">
+                                    {({ field }) => (
+                                        <LabeledInput
+                                            {...field}
+                                            id="password"
+                                            type="password"
+                                            label="Password"
+                                            placeholder="●●●●●●●●●●●●●●"
+                                            passwordEye
+                                        />
+                                    )}
+                                </Field>
+                                <ErrorMessage
+                                    name="password"
+                                    component="p"
+                                    className="text-red-500 text-xs mt-1"
+                                />
+                            </div>
 
-                    <LabeledInput
-                        label="Email Address"
-                        placeholder="hello@example.com"
-                        type="email"
-                    />
+                            {/* button */}
+                            <Button type="submit" disabled={isSubmitting}>
+                                {isSubmitting ? "Loading..." : "Create Account"}
+                            </Button>
 
-                    <LabeledInput
-                        label="Password"
-                        placeholder="• • • • • • • • • •"
-                        type="password"
-                        passwordEye={true}
-                    />
+                        </Form>
+                    )}
+                </Formik>
+            </div>
+            {/* form end */}
+
+            {/* divider text */}
+            <div className="my-9 px-7 flex flex-col justify-center items-center text-xs text-gray-03">
+                <div className="border border-gray-05 w-full"></div>
+                <div className="px-2 bg-special-mainBg absolute">
+                    or sign up with
                 </div>
+            </div>
 
-                {/* Terms */}
-                <p className="text-xs text-gray-500 mt-4 mb-6 text-center">
-                    By continuing, you agree to our{" "}
-                    <span className="text-teal-600 font-medium">terms of service</span>.
-                </p>
-
-                {/* Sign up Button */}
-                <Button className="w-full py-3 bg-teal-600 hover:bg-teal-700 text-white">
-                    Sign up
+            {/* google button */}
+            <div className="mb-8">
+                <Button type="button" variant="secondary">
+                    Continue with Google
                 </Button>
+            </div>
 
-                {/* Divider */}
-                <div className="flex items-center my-6">
-                    <div className="grow h-px bg-gray-300"></div>
-                    <span className="px-3 text-gray-500 text-sm">or sign up with</span>
-                    <div className="grow h-px bg-gray-300"></div>
-                </div>
-
-                {/* Google Login */}
-                <button className="w-full flex items-center justify-center gap-3 py-3 border border-gray-300 rounded-xl hover:bg-gray-100 transition">
-                    <GoogleIcon />
-                    <span className="text-gray-700 font-medium">
-                        Continue with Google
-                    </span>
-                </button>
-
-                {/* Already have account */}
-                <p className="text-center text-sm text-gray-600 mt-6">
-                    Already have an account?{" "}
-                    <Link to="/login" className="text-teal-600 font-semibold">
-                        Sign in here
-                    </Link>
-                </p>
+            {/* link */}
+            <div className="flex justify-center">
+                <Link
+                    to="/login"
+                    className="text-primary text-sm font-bold"
+                >
+                    Already have an account? Sign in
+                </Link>
             </div>
         </>
-    )
+    );
 }
 
-export default FormSignUp
+export default FormSignUp;

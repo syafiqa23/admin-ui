@@ -30,7 +30,7 @@ export const AuthContextProvider = ({ children }) => {
       console.error("Invalid token");
     }
   };
-  
+
   const logout = () => {
     setUser(null);
     localStorage.removeItem("token");

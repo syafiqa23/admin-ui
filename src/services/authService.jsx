@@ -1,12 +1,12 @@
 import axios from "axios";
 
-const API_URL = "https://jwt-auth-eight-neon.vercel.app"; // URL backend
+const API_URL = "https://jwt-auth-eight-neon.vercel.app"; 
 
 export const loginService = async (email, password) => {
   try {
     const response = await axios.post(
       `${API_URL}/login`,
-      { email, password }, 
+      { email, password },
     );
 
     return response.data;
@@ -15,17 +15,30 @@ export const loginService = async (email, password) => {
   }
 };
 
+export const registerService = async (payload) => {
+  try {
+    const response = await axios.post(
+      `${API_URL}/register`,
+      payload
+    );
+
+    return response.data;
+  } catch (error) {
+    throw error.response?.data || { msg: "Register gagal" };
+  }
+};
+
 export const logoutService = async () => {
   try {
     const token = localStorage.getItem("token");
 
-    await axios.post(`${API_URL}/logout`, 
-     {},
-	   {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      }, 
-     }
+    await axios.post(`${API_URL}/logout`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
     );
   } catch (error) {
     throw {
